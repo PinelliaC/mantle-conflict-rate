@@ -1,0 +1,48 @@
+[package]
+name = "mantle-conflict-rate"
+version = "0.1.0"
+edition = "2024"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[lints.rust]
+unreachable_pub = "warn"
+unused_must_use = "deny"
+
+[lints.rustdoc]
+all = "warn"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "mantle-conflict-rate"
+path = "src/main.rs"
+
+[dependencies]
+revm = { git = "https://github.com/mantle-xyz/revm", tag = "v1.1.0", features = [
+    "std",
+    "serde-json",
+    "ethersdb",
+    "optimism",
+] }
+ethers-providers = { version = "2.0", features = ["default", "optimism"] }
+ethers-core = { version = "2.0.14", features = ["optimism"] }
+
+# tokio
+tokio = { version = "1.40", features = ["rt-multi-thread", "macros"] }
+
+# alloy
+alloy-eips = "0.11.1"
+alloy-primitives = { version = "0.8.21", features = ["rlp"] }
+
+#op-alloy
+op-alloy-consensus = { git = "https://github.com/mantle-xyz/op-alloy", tag = "v1.0.0", features = [
+    "k256",
+] }
+
+# mics
+anyhow = "1.0.89"
+dotenv = "0.15"
